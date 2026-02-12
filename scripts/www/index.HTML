@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多功能APP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E40AF',
+                        secondary: '#3B82F6',
+                        accent: '#F97316',
+                        light: '#F3F4F6',
+                        dark: '#1F2937'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div id="app" class="max-w-md mx-auto h-screen bg-white shadow-lg flex flex-col">
+        <!-- 主内容区 -->
+        <main id="main-content" class="flex-1 overflow-y-auto">
+            <!-- 页面内容将通过JavaScript动态加载 -->
+        </main>
+
+        <!-- 底部导航栏 -->
+        <footer class="bg-white shadow-t-lg">
+            <div class="flex justify-around">
+                <button class="nav-btn flex flex-col items-center py-3 text-primary" data-page="home">
+                    <i class="fa fa-home text-xl"></i>
+                    <span class="text-xs mt-1">首页</span>
+                </button>
+                <button class="nav-btn flex flex-col items-center py-3 text-gray-500" data-page="wealth">
+                    <i class="fa fa-money text-xl"></i>
+                    <span class="text-xs mt-1">财富</span>
+                </button>
+                <button class="nav-btn flex flex-col items-center py-3 text-gray-500" data-page="credit-card">
+                    <i class="fa fa-credit-card text-xl"></i>
+                    <span class="text-xs mt-1">信用卡</span>
+                </button>
+                <button class="nav-btn flex flex-col items-center py-3 text-gray-500" data-page="life">
+                    <i class="fa fa-compass text-xl"></i>
+                    <span class="text-xs mt-1">中原生活</span>
+                </button>
+                <button class="nav-btn flex flex-col items-center py-3 text-gray-500" data-page="profile">
+                    <i class="fa fa-user text-xl"></i>
+                    <span class="text-xs mt-1">我的</span>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 页面数据
+        const pages = {
+            home: {
+                title: '首页',
+                headerRightBtn: '<i class="fa fa-search"></i>',
+                content: `
+                    <div class="h-full overflow-y-auto">
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/27a80b06f4c7448fbda88b68d5d15923.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260212204904D7A81F3A5E61833CB8C0&rrcfp=8a172a1a&x-expires=1771505344&x-signature=mCsVPitQkRn016OEJmcm%2Fkjze8A%3D" alt="首页图片" class="w-full">
+                    </div>
+                `
+            },
+            wealth: {
+                title: '财富',
+                headerRightBtn: '<i class="fa fa-cog"></i>',
+                content: `
+                    <div class="h-full overflow-y-auto">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/a71b7a11fd8a41d0bad9d3ed4b938617.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260212204904D7A81F3A5E61833CB8C0&rrcfp=8a172a1a&x-expires=1771505344&x-signature=9J%2FvT%2F5rTmocLDcoF%2FtK5UXWWPw%3D" alt="财富图片" class="w-full">
+                    </div>
+                `
+            },
+            'credit-card': {
+                title: '信用卡',
+                headerRightBtn: '<i class="fa fa-plus"></i>',
+                content: `
+                    <div class="h-full overflow-y-auto">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/d23f926a107c43c88731f5de956e1bd5.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260212204904D7A81F3A5E61833CB8C0&rrcfp=8a172a1a&x-expires=1771505344&x-signature=CUBzIWO9b%2FVRWDwAE7RSSa7Kq24%3D" alt="信用卡图片" class="w-full">
+                    </div>
+                `
+            },
+            life: {
+                title: '中原生活',
+                headerRightBtn: '<i class="fa fa-filter"></i>',
+                content: `
+                    <div class="h-full overflow-y-auto">
+                        <img src="https://p26-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/8bc4a90fd53449beb63b4a355f8a5f62.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260212204904D7A81F3A5E61833CB8C0&rrcfp=8a172a1a&x-expires=1771505344&x-signature=x8WwCMjCYuzgPYtd%2F8fvzzg6Ylc%3D" alt="中原生活图片" class="w-full">
+                    </div>
+                `
+            },
+            profile: {
+                title: '我的',
+                headerRightBtn: '<i class="fa fa-cog"></i>',
+                content: `
+                    <div class="h-full overflow-y-auto">
+                        <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/2f74d54051224f4297174076beee42ca.jpg~tplv-a9rns2rl98-24:720:720.image?lk3s=8e244e95&rcl=20260212204904D7A81F3A5E61833CB8C0&rrcfp=8a172a1a&x-expires=1771505344&x-signature=xYnI4e3W6LWpdskrOLppVc0UVSQ%3D" alt="我的图片" class="w-full">
+                    </div>
+                `
+            }
+        };
+
+        // DOM元素
+        const mainContent = document.getElementById('main-content');
+        const navBtns = document.querySelectorAll('.nav-btn');
+
+        // 初始化页面
+        function initPage() {
+            loadPage('home');
+            // 为底部导航按钮添加点击事件
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const page = btn.dataset.page;
+                    loadPage(page);
+                    // 更新底部导航栏的选中状态
+                    navBtns.forEach(b => {
+                        b.classList.remove('text-primary');
+                        b.classList.add('text-gray-500');
+                    });
+                    btn.classList.remove('text-gray-500');
+                    btn.classList.add('text-primary');
+                });
+            });
+        }
+
+        // 加载页面内容
+        function loadPage(pageName) {
+            const page = pages[pageName];
+            if (page) {
+                mainContent.innerHTML = page.content;
+            }
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>
